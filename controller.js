@@ -731,7 +731,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     };
     
     /*send otp */
+    var sendOtpprotect = 0; //partho
     $scope.sendOtp = function() {
+	if(sendOtpprotect === 0){
+	sendOtpprotect = 1;
         $scope.loading = true;
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
@@ -787,6 +790,8 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         });
 	}
 	    makeRequest();
+	}
+
     };
 
 
