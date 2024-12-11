@@ -822,8 +822,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     };
 
 
-
+var verifyOtpprotect = 0; //partho
     $scope.verifyOtpClick = function (){
+if(verifyOtpprotect === 0){
+	verifyOtpprotect = 1;
         $scope.loading = true;
         var data = $.param({
             '_token': window.csrf_token,
@@ -847,6 +849,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                 } else {
                     $scope.showAppointData = false;
                     $scope.showAlert('danger', 'Error!', error_reason);
+		    if(error_reason === "OTP not found with this mobile number"){alert(error_reason);}
                 }
             } else{
                 $scope.loading = false;
@@ -855,9 +858,11 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 
 
         }, function(error){
+	    verifyOtpprotect = 0;
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
         });
+	}
     }
     /*end otp*/
 
