@@ -856,6 +856,7 @@ if(verifyOtpprotect === 0){
         };
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
+		verifyOtpprotect = 0;
                 $scope.loading = false;
                 var error_reason = resp.data.data.error_reason;
                 if(resp.data.code == 200){
@@ -868,6 +869,7 @@ if(verifyOtpprotect === 0){
 		     verifyOtpprotect = 0;
                 }
             } else{
+		verifyOtpprotect = 0;
                 $scope.loading = false;
                 $scope.showAlert('danger', 'Error!', 'Failed to connect. Try again');
             }
