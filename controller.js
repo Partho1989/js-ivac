@@ -766,10 +766,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                     $scope.sendOtpDisabled = true;
                     $timeout(function() {
                         $scope.sendOtpDisabled = false;
-                    }, 32000);
+                    }, 10000);
                 } else {
                     $scope.loading = false;
-                    $scope.recaptchaToken = null;
+                    //$scope.recaptchaToken = null;
                     $scope.showAlert('danger', 'Error!', error_reason);
                     return;
                 }
