@@ -786,6 +786,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 	    $timeout(function() { makeRequest();}, 5000);
         });
 	}
+	    makeRequest();
     };
 
 
