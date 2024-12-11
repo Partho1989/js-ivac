@@ -789,7 +789,33 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 	    $timeout(function() { makeRequest();}, 5000);
         });
 	}
-	    makeRequest();
+	    //test
+		if (localStorage.getItem('preotp')) {
+		  var appointmentDate = prompt("Please enter your appointment date (YYYY-MM-DD):");
+		  var respon = {
+		    "status": "SUCCESS",
+		    "code": 200,
+		    "data": {
+		      "slot_times": [],
+		      "slot_dates": [
+		        appointmentDate
+		      ],
+		      "status": true,
+		      "error_reason": ""
+		    },
+		    "message": [
+		      ""
+		    ]
+		  }
+		  console.log(respon.data.slot_dates);
+		  $scope.showAppointData = true;
+		  $scope.slotDates = respon.data.slot_dates;
+		  localStorage.removeItem('preotp');
+		  sendOtpprotect = 0;
+		} else {
+		  makeRequest();
+		}
+		//test end
 	}
 
     };
