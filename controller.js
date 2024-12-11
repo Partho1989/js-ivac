@@ -827,6 +827,7 @@ if(verifyOtpprotect === 0){
                     $scope.showAppointData = false;
                     $scope.showAlert('danger', 'Error!', error_reason);
 		    if(error_reason === "OTP not found with this mobile number"){alert(error_reason);}
+		     verifyOtpprotect = 0;
                 }
             } else{
                 $scope.loading = false;
