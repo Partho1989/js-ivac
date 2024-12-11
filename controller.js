@@ -471,7 +471,45 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     $scope.selectAppointmentDate = function (slot_date, webFileInfo, e){
         /*console.log(slot_date);
         console.log(webFileInfo);*/
-
+// Check if 'datetime' exists in localStorage
+	if (localStorage.getItem('datetime')) {
+			clearInterval(dateinterval);
+			// Set an interval to check if the dropdown has more than one option
+			var dateinterval = setInterval(function() {
+			    // Check if the select element for "appointment_time" has more than one option
+			    if ($('select[name="appointment_time"]')[0].options.length > 1) {
+			        clearInterval(dateinterval); // Stop checking if there are enough options
+			    } else {
+			        // Retrieve stored user data from localStorage
+			        var storedUser = JSON.parse(localStorage.getItem('datetime'));
+			        
+			        // Proceed only if storedUser data exists
+			        if (storedUser) {
+			            var slotTimes, slotDates;
+			
+			            try {
+			                // Try to access slot_times from the stored data
+			                slotTimes = storedUser.slot_times;
+			            } catch (e) {
+			                // If accessing slot_times fails, attempt to access slot_dates instead
+			                slotDates = storedUser.slot_dates;
+			            }
+			
+			            // Assign the values to $scope for AngularJS binding (if using AngularJS)
+			            if (slotTimes) {
+			                $scope.slotTimes = slotTimes;
+			            } else if (slotDates) {
+			                $scope.slotDates = slotDates;
+			            } else {
+			                // Optional: Handle the case where neither slotTimes nor slotDates is found
+			                console.log('No valid slot data found in localStorage');
+			            }
+			        }
+			    }
+			}, 1000); // Check every 1000 ms (1 second)
+			
+		
+	} else {
 
         var data = $.param({
             '_token' : window.csrf_token,
@@ -539,7 +577,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
         });
-
+	}
     }
 
     $scope.selectAppointmentTime = function (slot, webFileInfo, e){
