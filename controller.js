@@ -638,13 +638,13 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                         }
                         else{
                             $scope.loading = false;
-                            //$scope.recaptchaTokenPay = null;
+                            $scope.recaptchaTokenPay = null;
                             $scope.showAlert('danger', 'Error!', 'Payment gateway not running right now');
                         }
                     }
                     else if(resp.data.status === 'FAIL'){
                         $scope.loading = false;
-                        //$scope.recaptchaTokenPay = null;
+                        $scope.recaptchaTokenPay = null;
                         if(!angular.isUndefined(resp.data.errors)) {
                             $scope.errors = '';
                             try {
