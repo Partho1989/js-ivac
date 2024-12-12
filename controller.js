@@ -765,8 +765,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.$apply(function() {
             $scope.recaptchaToken = token;
             $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists
-	    $scope.recaptchaTokenPay = token;
-	    $scope.captchaVerifiedPay = !!token;
+
         });
     };
     
