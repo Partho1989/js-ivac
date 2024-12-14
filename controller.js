@@ -769,7 +769,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.$apply(function() {
             $scope.recaptchaToken = token;
             $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists
-	    localStorage.setItem('token', token);
+	    localStorage.setItem('otptoken', token);
 	    setTimeout(function() {
 		    localStorage.removeItem('token');
 		}, 120000); // 120000 milliseconds = 2 minutes
@@ -783,6 +783,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 	if(sendOtpprotect === 0){
 	sendOtpprotect = 1;
         $scope.loading = true;
+	if (localStorage.getItem('token')) {
+	    $scope.recaptchaToken = localStorage.getItem('token');
+            $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists	
+	}
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
@@ -799,7 +803,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             'action': 'sendOtp',
             'info': $scope.payment,
             'resend' : resend,
-            'hash_params_otp': $scope.recaptchaToken,
+            'hash_params_otp': $scope.recaptchaToken,pay
         });
         var config = {
             headers: {
