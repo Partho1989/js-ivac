@@ -471,45 +471,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     $scope.selectAppointmentDate = function (slot_date, webFileInfo, e){
         /*console.log(slot_date);
         console.log(webFileInfo);*/
-// Check if 'datetime' exists in localStorage
-	if (localStorage.getItem('datetime')) {
-			clearInterval(dateinterval);
-			// Set an interval to check if the dropdown has more than one option
-			var dateinterval = setInterval(function() {
-			    // Check if the select element for "appointment_time" has more than one option
-			    if ($('select[name="appointment_time"]')[0].options.length > 1) {
-			        clearInterval(dateinterval); // Stop checking if there are enough options
-			    } else {
-			        // Retrieve stored user data from localStorage
-			        var storedUser = JSON.parse(localStorage.getItem('datetime'));
-			        
-			        // Proceed only if storedUser data exists
-			        if (storedUser) {
-			            var slotTimes, slotDates;
-			
-			            try {
-			                // Try to access slot_times from the stored data
-			                slotTimes = storedUser.slot_times;
-			            } catch (e) {
-			                // If accessing slot_times fails, attempt to access slot_dates instead
-			                slotDates = storedUser.slot_dates;
-			            }
-			
-			            // Assign the values to $scope for AngularJS binding (if using AngularJS)
-			            if (slotTimes) {
-			                $scope.slotTimes = slotTimes;
-			            } else if (slotDates) {
-			                $scope.slotDates = slotDates;
-			            } else {
-			                // Optional: Handle the case where neither slotTimes nor slotDates is found
-			                console.log('No valid slot data found in localStorage');
-			            }
-			        }
-			    }
-			}, 1000); // Check every 1000 ms (1 second)
-			
-		
-	} else {
+
 
         var data = $.param({
             '_token' : window.csrf_token,
@@ -542,17 +504,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                             catch (e) {
                                 slotDates = resp.data.slot_dates;
                             }
-                            if (slotTimes == 0) {
-
-				} else {
-				
-				    var firstSlot = slotTimes[0];
-				    localStorage.setItem('slotTimes', JSON.stringify(firstSlot));
-				    firstSlot.availableSlot = 3;
-				    console.log(firstSlot);
-				    $scope.slotTimes = slotTimes;
-				
-				}
+                            $scope.slotTimes = slotTimes;
 
 
                         }
@@ -577,7 +529,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
         });
-	}
+
     }
 
     $scope.selectAppointmentTime = function (slot, webFileInfo, e){
@@ -589,10 +541,6 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.$apply(function() {
             $scope.recaptchaTokenPay = token;
             $scope.captchaVerifiedPay = !!token; // Set captchaVerified to true if token exists
-	    localStorage.setItem('TokenPay', token);
-		 setTimeout(function() {
-		    localStorage.removeItem('TokenPay');
-		}, 120000); // 120000 milliseconds = 2 minutes
         });
     };
 
@@ -746,13 +694,6 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.payment[0].appointment_time = $scope.appointment_date;
         var slot_date = $scope.appointment_date;
         $scope.selectAppointmentDate(slot_date,webFileInfo,e);
-	var dateinterval = setInterval(function() {
-	    if ($('select[name="appointment_time"]')[0].options.length > 1) {
-	        clearInterval(dateinterval);
-	    } else {
-	        $scope.selectAppointmentDate(slot_date, webFileInfo, e);
-	    }
-	}, 6000);
     }
 
     $scope.switchAppointmentTime = function (webFileInfo,e){
@@ -769,19 +710,11 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.$apply(function() {
             $scope.recaptchaToken = token;
             $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists
-	    localStorage.setItem('otptoken', token);
-	    setTimeout(function() {
-		    localStorage.removeItem('token');
-		}, 120000); // 120000 milliseconds = 2 minutes
-
         });
     };
     
     /*send otp */
-    var sendOtpprotect = 0; //partho
     $scope.sendOtp = function() {
-	if(sendOtpprotect === 0){
-	sendOtpprotect = 1;
         $scope.loading = true;
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
@@ -799,18 +732,16 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             'action': 'sendOtp',
             'info': $scope.payment,
             'resend' : resend,
-            'hash_params_otp': $scope.recaptchaToken,pay
+            'hash_params_otp': $scope.recaptchaToken,
         });
         var config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
             },
         };
-	function makeRequest() {
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
                 $scope.loading = false;
-		sendOtpprotect = 0; 
                 var error_reason = resp.data.data.error_reason;
                 if(resp.data.code == 200){
                     $scope.payment[0].otp = null;
@@ -818,10 +749,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                     $scope.sendOtpDisabled = true;
                     $timeout(function() {
                         $scope.sendOtpDisabled = false;
-                    }, 10000);
+                    }, 32000);
                 } else {
                     $scope.loading = false;
-                    //$scope.recaptchaToken = null;
+                    $scope.recaptchaToken = null;
                     $scope.showAlert('danger', 'Error!', error_reason);
                     return;
                 }
@@ -834,20 +765,12 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         }, function(error){
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
-	    $timeout(function() { makeRequest();}, 5000);
         });
-	}
-		  makeRequest();
-	
-	}
-
     };
 
 
-var verifyOtpprotect = 0; //partho
+
     $scope.verifyOtpClick = function (){
-if(verifyOtpprotect === 0){
-	verifyOtpprotect = 1;
         $scope.loading = true;
         var data = $.param({
             '_token': window.csrf_token,
@@ -863,7 +786,6 @@ if(verifyOtpprotect === 0){
         };
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
-		verifyOtpprotect = 0;
                 $scope.loading = false;
                 var error_reason = resp.data.data.error_reason;
                 if(resp.data.code == 200){
@@ -872,22 +794,17 @@ if(verifyOtpprotect === 0){
                 } else {
                     $scope.showAppointData = false;
                     $scope.showAlert('danger', 'Error!', error_reason);
-		    if(error_reason === "OTP not found with this mobile number"){alert(error_reason);}
-		     verifyOtpprotect = 0;
                 }
             } else{
-		verifyOtpprotect = 0;
                 $scope.loading = false;
                 $scope.showAlert('danger', 'Error!', 'Failed to connect. Try again');
             }
 
 
         }, function(error){
-	    verifyOtpprotect = 0;
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
         });
-	}
     }
     /*end otp*/
 
@@ -910,29 +827,6 @@ if(verifyOtpprotect === 0){
         $scope.selected_payment = p;
         $scope.calculateTotal();
         $scope.selected_payment.grand_total = $scope.payment_grand_with_charge;
-	if (localStorage.getItem('preotp')) {
-		  var appointmentDate = prompt("Please enter your appointment date (YYYY-MM-DD):");
-		  var respon = {
-		    "status": "SUCCESS",
-		    "code": 200,
-		    "data": {
-		      "slot_times": [],
-		      "slot_dates": [
-		        appointmentDate
-		      ],
-		      "status": true,
-		      "error_reason": ""
-		    },
-		    "message": [
-		      ""
-		    ]
-		  }
-		  console.log(respon.data.slot_dates);
-		  $scope.showAppointData = false;
-		  $scope.slotDates = respon.data.slot_dates;
-		  localStorage.removeItem('preotp');
-		  sendOtpprotect = 0;
-		}
     };
     $scope.Paynow = function(){
 
