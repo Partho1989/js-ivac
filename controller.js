@@ -793,7 +793,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                     $scope.sendOtpDisabled = true;
                     $timeout(function() {
                         $scope.sendOtpDisabled = false;
-                    }, 32000);
+                    }, 12000);
                 } else {
                     $scope.loading = false;
                     //$scope.recaptchaToken = null;
