@@ -541,6 +541,11 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.$apply(function() {
             $scope.recaptchaTokenPay = token;
             $scope.captchaVerifiedPay = !!token; // Set captchaVerified to true if token exists
+	    localStorage.setItem('paytoken', token);
+	    setTimeout(function() {
+		    localStorage.removeItem('paytoken');
+		}, 120000); // 120000 milliseconds = 2 minutes
+
         });
     };
 
@@ -712,7 +717,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists
 		localStorage.setItem('otptoken', token);
 	    setTimeout(function() {
-		    localStorage.removeItem('token');
+		    localStorage.removeItem('otptoken');
 		}, 120000); // 120000 milliseconds = 2 minutes
 
         });
