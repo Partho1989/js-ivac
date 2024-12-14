@@ -724,9 +724,11 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
 	    var token = prompt("Please enter hash token");
-	    $scope.recaptchaToken = token;
-            //return;
-        }
+		if (token !== "") {
+		    $scope.recaptchaToken = token;
+		} else{
+			return;
+		}
 
         var resend = $scope.verifyOtp ? 1 : 0;
         // var recaptchaSiteKey = document.getElementById('hashed-param').getAttribute('data-hashed-param');
