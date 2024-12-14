@@ -567,7 +567,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             if (tokenpay === "") {
 	    return;
 		} else {
-		    $scope.recaptchaTokenPay = token;
+		    $scope.recaptchaTokenPay = tokenpay;
 		}
         }
 
