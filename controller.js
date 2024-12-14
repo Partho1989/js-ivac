@@ -746,7 +746,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     };
     
     /*send otp */
-    sendOtpprotect === 0;
+    sendOtpprotect = 0;
     $scope.sendOtp = function() {
 
         //$scope.loading = true;
@@ -758,7 +758,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 		    return;
 		} else {
 		    $scope.recaptchaToken = token;
-		   sendOtpprotect === 0;
+		   sendOtpprotect = 0;
 		}
 
         }
@@ -785,7 +785,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
                 $scope.loading = false;
-		sendOtpprotect === 0;
+		 sendOtpprotect = 0;
                 var error_reason = resp.data.data.error_reason;
                 if(resp.data.code == 200){
                     $scope.payment[0].otp = null;
