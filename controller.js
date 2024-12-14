@@ -785,7 +785,6 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.loading = true;
 	if (localStorage.getItem('token')) {
 	    $scope.recaptchaToken = localStorage.getItem('token');
-            $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists	
 	}
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
