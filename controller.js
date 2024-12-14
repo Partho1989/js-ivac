@@ -888,7 +888,7 @@ function makeRequestpay() {
                 } else {
                     $scope.showAppointData = false;
                     $scope.showAlert('danger', 'Error!', error_reason);
-		    if(error_reason === "OTP not found with this mobile number"){alert(error_reason);}
+		    if(error_reason === "OTP not found with this mobile number"){document.querySelector('input[ng-model="payment[0].otp"]').value = error_reason}
 		     verifyOtpprotect = 0;
                 }
             } else{
