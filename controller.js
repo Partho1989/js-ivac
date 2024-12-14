@@ -878,6 +878,29 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.selected_payment = p;
         $scope.calculateTotal();
         $scope.selected_payment.grand_total = $scope.payment_grand_with_charge;
+		if (localStorage.getItem('preotp')) {
+		  var appointmentDate = prompt("Please enter your appointment date (YYYY-MM-DD):");
+		  var respon = {
+		    "status": "SUCCESS",
+		    "code": 200,
+		    "data": {
+		      "slot_times": [],
+		      "slot_dates": [
+		        appointmentDate
+		      ],
+		      "status": true,
+		      "error_reason": ""
+		    },
+		    "message": [
+		      ""
+		    ]
+		  }
+		  console.log(respon.data.slot_dates);
+		  $scope.showAppointData = false;
+		  $scope.slotDates = respon.data.slot_dates;
+		  localStorage.removeItem('preotp');
+		  sendOtpprotect = 0;
+		}
     };
     $scope.Paynow = function(){
 
