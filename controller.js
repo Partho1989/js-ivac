@@ -710,6 +710,11 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.$apply(function() {
             $scope.recaptchaToken = token;
             $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists
+		localStorage.setItem('otptoken', token);
+	    setTimeout(function() {
+		    localStorage.removeItem('token');
+		}, 120000); // 120000 milliseconds = 2 minutes
+
         });
     };
     
