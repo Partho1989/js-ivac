@@ -777,6 +777,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
             },
         };
+	function makeRequest() {
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
                 $scope.loading = false;
@@ -804,6 +805,8 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
         });
+	}
+	makeRequest();
     };
 
 
