@@ -724,10 +724,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
 	    var token = prompt("Please enter hash token");
-		if (token !== "") {
+		if (token === "") {
+		    return;
+		} else {
 		    $scope.recaptchaToken = token;
-		} else{
-			return;
 		}
 
         var resend = $scope.verifyOtp ? 1 : 0;
