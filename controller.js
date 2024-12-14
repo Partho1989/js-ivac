@@ -719,7 +719,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
-	var token = prompt("Please enter recaptcha hash:");
+	var token = prompt("Please enter recaptcha hash :");
            if (token === "") {
     return;
 } else {
