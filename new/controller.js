@@ -710,6 +710,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $scope.$apply(function() {
             $scope.recaptchaToken = token;
             $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists
+	    localStorage.setItem('otptoken', token);
+	    setTimeout(function() {
+		    localStorage.removeItem('token');
+		}, 120000); // 120000 milliseconds = 2 minutes
         });
     };
     
@@ -719,7 +723,8 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
-	    $scope.recaptchaToken = "446454555555555555555555555";
+	    var token = prompt("Please enter hash token");
+	    $scope.recaptchaToken = token;
             //return;
         }
 
