@@ -788,6 +788,8 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 		 sendOtpprotect = 0;
                 var error_reason = resp.data.data.error_reason;
                 if(resp.data.code == 200){
+		    $scope.recaptchaToken = null;
+		    localStorage.removeItem('otptoken');
                     $scope.payment[0].otp = null;
                     $scope.verifyOtp = true;
                     $scope.sendOtpDisabled = true;
@@ -796,7 +798,8 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                     }, 12000);
                 } else {
                     $scope.loading = false;
-                    //$scope.recaptchaToken = null;
+                    $scope.recaptchaToken = null;
+		    localStorage.removeItem('otptoken');
                     $scope.showAlert('danger', 'Error!', error_reason);
                     return;
                 }
