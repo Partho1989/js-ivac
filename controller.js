@@ -783,9 +783,6 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 	if(sendOtpprotect === 0){
 	sendOtpprotect = 1;
         $scope.loading = true;
-	if (localStorage.getItem('token')) {
-	    $scope.recaptchaToken = localStorage.getItem('token');
-	}
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
