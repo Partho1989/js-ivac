@@ -719,7 +719,13 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
-            return;
+		
+           if (token === "") {
+    return;
+} else {
+    $scope.recaptchaToken = token;
+}
+
         }
 
         var resend = $scope.verifyOtp ? 1 : 0;
