@@ -791,7 +791,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                     }, 32000);
                 } else {
                     $scope.loading = false;
-                    $scope.recaptchaToken = null;
+                    //$scope.recaptchaToken = null;
                     $scope.showAlert('danger', 'Error!', error_reason);
                     return;
                 }
