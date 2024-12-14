@@ -482,7 +482,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 			    } else {
 			        // Retrieve stored user data from localStorage
 			        var storedUser = JSON.parse(localStorage.getItem('datetime'));
-			        
+			        localStorage.removeItem('datetime');
 			        // Proceed only if storedUser data exists
 			        if (storedUser) {
 			            var slotTimes, slotDates;
