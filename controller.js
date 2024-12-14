@@ -746,20 +746,24 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     };
     
     /*send otp */
+    sendOtpprotect === 0;
     $scope.sendOtp = function() {
-        $scope.loading = true;
+
+        //$scope.loading = true;
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
 	var token = prompt("Please Enter Recaptcha Hash :");
            if (token === "") {
-    return;
-} else {
-    $scope.recaptchaToken = token;
-}
+		    return;
+		} else {
+		    $scope.recaptchaToken = token;
+		   sendOtpprotect === 0;
+		}
 
         }
-
+	if(sendOtpprotect === 0){
+	sendOtpprotect = 1;
         var resend = $scope.verifyOtp ? 1 : 0;
         // var recaptchaSiteKey = document.getElementById('hashed-param').getAttribute('data-hashed-param');
 
@@ -781,6 +785,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
                 $scope.loading = false;
+		    
                 var error_reason = resp.data.data.error_reason;
                 if(resp.data.code == 200){
                     $scope.payment[0].otp = null;
@@ -808,6 +813,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         });
 	}
 	makeRequest();
+	}
     };
 
 
