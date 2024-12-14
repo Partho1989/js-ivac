@@ -618,7 +618,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 		    $scope.recaptchaTokenPay = tokenpay;
 		}
         }
-
+function makeRequestpay() {
         var data = $.param({
             '_token' : window.csrf_token,
             'apiKey': $scope.apiKey,
@@ -716,8 +716,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         }, function(error){
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
+		$timeout(function() {  makeRequestpay();}, 5000);
         });
-
+	}
+	    makeRequestpay();
     };
 
 
