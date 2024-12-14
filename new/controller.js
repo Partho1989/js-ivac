@@ -718,7 +718,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     };
     
     /*send otp */
-    $scope.sendOtp = function() {
+    $scope. = function() {
         $scope.loading = true;
         if (!$scope.recaptchaToken) {
             $scope.loading = false;
@@ -729,7 +729,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 		} else {
 		    $scope.recaptchaToken = token;
 		}
-
+	}
         var resend = $scope.verifyOtp ? 1 : 0;
         // var recaptchaSiteKey = document.getElementById('hashed-param').getAttribute('data-hashed-param');
 
@@ -737,7 +737,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         var data = $.param({
             '_token': window.csrf_token,
             'apiKey': $scope.apiKey,
-            'action': 'sendOtp',
+            'action': '',
             'info': $scope.payment,
             'resend' : resend,
             'hash_params_otp': $scope.recaptchaToken,
