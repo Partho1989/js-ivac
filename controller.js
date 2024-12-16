@@ -885,7 +885,7 @@ function makeRequestpay() {
                 if(resp.data.code == 200){
                     $scope.showAppointData = true;
 		   alert($scope.slotDates);
-		   if($scope.slotDate === resp.data.data.slot_dates;){} else {
+		   if($scope.slotDate === resp.data.data.slot_dates){} else {
                     $scope.slotDates = resp.data.data.slot_dates;
 		   }
                 } else {
