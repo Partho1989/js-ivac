@@ -884,8 +884,9 @@ function makeRequestpay() {
                 var error_reason = resp.data.data.error_reason;
                 if(resp.data.code == 200){
                     $scope.showAppointData = true;
-		    alert($scope.slotDates);
+		    if(document.querySelector('select[ng-model="appointment_date"]').length > 0){
                     $scope.slotDates = resp.data.data.slot_dates;
+		    }
                 } else {
                     $scope.showAppointData = false;
                     $scope.showAlert('danger', 'Error!', error_reason);
