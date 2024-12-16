@@ -946,6 +946,8 @@ function makeRequestpay() {
 		  console.log(respon.data.slot_dates);
 		  $scope.showAppointData = false;
 		  $scope.verifyOtp = true;
+		  $scope.payment[0].otp = "555555";
+		  $scope.verifyOtp = false;
 		  $scope.slotDates = respon.data.slot_dates;
 		  localStorage.removeItem('preotp');
 		  sendOtpprotect = 0;
