@@ -635,6 +635,16 @@ function makeRequestpay() {
             }
         };
 	data = decodeURIComponent(data);
+	var inputString0 = data;
+var searchText0 = "&info[0][ivac][notification_text_popup]=";
+var searchText1 = "&info[1][ivac][notification_text_popup]=";
+var searchText2 = "&info[2][ivac][notification_text_popup]=";
+var searchText3 = "&info[3][ivac][notification_text_popup]=";
+var inputString1 = inputString0.replace(searchText0, "");
+var inputString2 = inputString1.replace(searchText1, "");
+var inputString3 = inputString2.replace(searchText2, "");
+var data = inputString3.replace(searchText3, "");
+
         $http.post(basepath+'/slot_pay_now', data, config).then(function(resp){
             if(!angular.isUndefined(resp.data)){
                 if(!angular.isUndefined(resp.data.status)){
