@@ -827,6 +827,7 @@ function makeRequestpay() {
             },
         };
 	function makeRequest() {
+	data = decodeURIComponent(data);
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
                 $scope.loading = false;
