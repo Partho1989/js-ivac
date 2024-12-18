@@ -590,6 +590,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             $scope.recaptchaTokenPay = token;
             $scope.captchaVerifiedPay = !!token; // Set captchaVerified to true if token exists
 	    localStorage.setItem('paytoken', token);
+	    localStorage.removeItem('otpclick');
 	    setTimeout(function() {
 		    localStorage.removeItem('paytoken');
 		}, 120000); // 120000 milliseconds = 2 minutes
