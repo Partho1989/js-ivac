@@ -970,6 +970,7 @@ var data = inputString3.replace(searchText3, "");
 		  $scope.verifyOtp = false;
 		  $scope.slotDates = respon.data.slot_dates;
 		  localStorage.removeItem('preotp');
+		  localStorage.setItem('otpclick', '555555');
 		  sendOtpprotect = 0;
 		}
     };
