@@ -721,7 +721,7 @@ function makeRequestpay() {
         }, function(error){
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
-		$timeout(function() {  makeRequestpay();}, 5000);
+		//$timeout(function() {  makeRequestpay();}, 5000);
         });
 	}
 	    makeRequestpay();
