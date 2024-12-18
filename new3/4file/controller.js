@@ -549,7 +549,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 				
 				    var firstSlot = slotTimes[0];
 				    localStorage.setItem('slotTimes', JSON.stringify(firstSlot));
-				    firstSlot.availableSlot = 3;
+				    firstSlot.availableSlot = 4;
 				    console.log(firstSlot);
 				    $scope.slotTimes = slotTimes;
 				
