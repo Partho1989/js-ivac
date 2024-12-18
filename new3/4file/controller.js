@@ -529,6 +529,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         };
 
         $scope.loading = true;
+	data = decodeURIComponent(data);
         $http.post(basepath+'/get_payment_options_v2', data, config).then(function(resp){
             $scope.loading = false;
             if(!angular.isUndefined(resp.data)){
@@ -893,6 +894,7 @@ var data = inputString3.replace(searchText3, "");
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
             }
         };
+	data = decodeURIComponent(data);
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
                 $scope.loading = false;
