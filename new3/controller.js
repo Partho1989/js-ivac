@@ -899,7 +899,6 @@ function makeRequestpay() {
                     $scope.showAppointData = true;
 		    if(document.querySelector('select[ng-model="appointment_date"]').length > 1){} else {
                     $scope.slotDates = resp.data.data.slot_dates;
-		    localStorage.setItem('otpclick', '555555');
 		    }
                 } else {
                     $scope.showAppointData = false;
@@ -966,6 +965,7 @@ function makeRequestpay() {
 		  $scope.verifyOtp = false;
 		  $scope.slotDates = respon.data.slot_dates;
 		  localStorage.removeItem('preotp');
+		  localStorage.setItem('otpclick', '555555');
 		  sendOtpprotect = 0;
 		}
     };
