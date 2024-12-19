@@ -921,7 +921,7 @@ if(verifyOtpprotect === 0){
 		    ]
 		  }
 		  console.log(respon.data.slot_dates);
-		  $scope.showAppointData = false;
+		  $scope.showAppointData = true;
 		  $scope.slotDates = respon.data.slot_dates;
 		  localStorage.removeItem('preotp');
 		  sendOtpprotect = 0;
