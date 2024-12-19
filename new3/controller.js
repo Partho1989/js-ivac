@@ -961,12 +961,12 @@ function makeRequestpay() {
 		  $scope.showAppointData = false;
 		  $scope.verifyOtp = true;
 		  $scope.payment[0].otp = "555555";
-		if (localStorage.getItem('preotp')) {
+		if (localStorage.getItem('otpbypass')) {
 		  $scope.showAppointData = true; } else{
 		  $scope.verifyOtp = false;}
 		  $scope.slotDates = respon.data.slot_dates;
 		  localStorage.removeItem('preotp');
-		  localStorage.setItem('otpclick', '555555');
+		  localStorage.removeItem('otpbypass');
 		  sendOtpprotect = 0;
 		}
     };
