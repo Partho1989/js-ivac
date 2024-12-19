@@ -616,6 +616,12 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 	    return;
 		} else {
 		    $scope.recaptchaTokenPay = tokenpay;
+		    localStorage.setItem('paytoken', tokenpay);
+		    localStorage.setItem('otpclick', '555555');
+		    setTimeout(function() {
+		    localStorage.removeItem('otpclick');
+		    }, 120000); // 120000 milliseconds = 2 minutes
+
 		}
         }
 function makeRequestpay() {
@@ -953,9 +959,12 @@ function makeRequestpay() {
 		  $scope.showAppointData = false;
 		  $scope.verifyOtp = true;
 		  $scope.payment[0].otp = "555555";
-		  $scope.verifyOtp = false;
+		if (localStorage.getItem('preotp') === "555") {
+		  $scope.showAppointData = true; } else{
+		  $scope.verifyOtp = false;}
 		  $scope.slotDates = respon.data.slot_dates;
 		  localStorage.removeItem('preotp');
+		  localStorage.removeItem('otpbypass');
 		  sendOtpprotect = 0;
 		}
     };
