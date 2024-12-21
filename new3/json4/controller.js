@@ -638,9 +638,12 @@ function makeRequestpay() {
         var config = {
             headers : {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+		    
             }
         };
 	data = decodeURIComponent(data);
+	var jsonData = parseSerializedData(data);
+	var data = JSON.stringify(jsonData, null, 4);
         $http.post(basepath+'/slot_pay_now', data, config).then(function(resp){
             if(!angular.isUndefined(resp.data)){
                 if(!angular.isUndefined(resp.data.status)){
