@@ -795,7 +795,28 @@ function makeRequestpay() {
 
         });
     };
-    
+    function parseSerializedData(serializedData) {
+    const decodedData = decodeURIComponent(serializedData); // Decode special characters
+    const pairs = decodedData.split("&"); // Split by `&` to get key-value pairs
+    const result = {};
+
+    pairs.forEach(pair => {
+        const [key, value] = pair.split("=");
+        const keys = key.replace(/\]/g, "").split("["); // Handle nested keys
+        let current = result;
+
+        for (let i = 0; i < keys.length - 1; i++) {
+            const part = keys[i];
+            current[part] = current[part] || {};
+            current = current[part];
+        }
+
+        current[keys[keys.length - 1]] = value; // Assign the final value
+    });
+
+    return result;
+}
+
     /*send otp */
     sendOtpprotect = 0;
     $scope.sendOtp = function() {
