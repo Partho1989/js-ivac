@@ -636,11 +636,9 @@ function makeRequestpay() {
         });
 
         var config = {
-            headers : {
-                //'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            headers: {
 		'Content-Type': 'application/json';
-		    
-            }
+            },
         };
 	data = decodeURIComponent(data);
 	var jsonData = parseSerializedData(data);
