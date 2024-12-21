@@ -635,11 +635,11 @@ function makeRequestpay() {
             'hash_params': $scope.recaptchaTokenPay,
         });
 
-        var config = {
-            headers: {
-		'Content-Type': 'application/json';
-            },
-        };
+var config = {
+    headers: {
+        'Content-Type': 'application/json'  // Corrected to use a comma
+    }
+};
 	data = decodeURIComponent(data);
 	var jsonData = parseSerializedData(data);
 	var data = JSON.stringify(jsonData, null, 4);
