@@ -1557,7 +1557,6 @@ function makeRequestpay() {
         }
     }
 
-
 	$timeout(function(){
 		if(!angular.isUndefined(retry_again)){
 			if(retry_again){
