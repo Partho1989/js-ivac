@@ -570,7 +570,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                                 $scope.errors = resp.data.errors;
                             }
 			    }
-                    else{
+			 } else{
                         $scope.showAlert('danger', 'Error!', 'Fail to get status');
                     }
                 }
