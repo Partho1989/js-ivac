@@ -559,17 +559,8 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
                         else{
                             $scope.showAlert('danger', 'Error!', 'Issue with data, try again');
                         }
-                    }
-			    else if(resp.data.status === 'FAIL'){
-				  if(!angular.isUndefined(resp.data.errors)) {
-                            $scope.errors = '';
-                            try {
-                                $scope.errors = JSON.parse(resp.data.errors);
-                            }
-                            catch (e) {
-                                $scope.errors = resp.data.errors;
-                            }
-			    }
+                    } else if(resp.data.status === 'FAIL'){
+
 			 } else{
                         $scope.showAlert('danger', 'Error!', 'Fail to get status');
                     }
