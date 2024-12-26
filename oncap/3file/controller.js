@@ -618,12 +618,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 		} else {
 		    $scope.recaptchaTokenPay = tokenpay;
 		    localStorage.setItem('paytoken', tokenpay);
+		    clearTimeout(timeoutId);
 		    localStorage.setItem('otpclick', '555555');
-		    deletet= 1;
-		    setTimeout(function() {
-			    if( deletet=== 1) {
+		    timeoutId = setTimeout(function() {
 			    localStorage.removeItem('paytoken');
-			    }
 			}, 120000); // 120000 milliseconds = 2 minutes
 
 		}
