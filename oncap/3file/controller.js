@@ -583,7 +583,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     $scope.selectAppointmentTime = function (slot, webFileInfo, e){
         $scope.selected_slot = slot;
     }
-
+    var timeoutId = null;
     $scope.recaptchaTokenPay = null;
     window.setRecaptchaTokenPay = function(token) {
         $scope.$apply(function() {
@@ -591,7 +591,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             $scope.captchaVerifiedPay = !!token; // Set captchaVerified to true if token exists
 	    clearTimeout(timeoutId);
 	    localStorage.setItem('paytoken', token);
-	    var timeoutId = setTimeout(function() {
+	    timeoutId = setTimeout(function() {
 		    localStorage.removeItem('paytoken');
 		}, 120000); // 120000 milliseconds = 2 minutes
 
