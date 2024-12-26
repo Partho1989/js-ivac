@@ -669,6 +669,24 @@ var inputString1 = inputString0.replace(searchText0, "");
 var inputString2 = inputString1.replace(searchText1, "");
 var inputString3 = inputString2.replace(searchText2, "");
 var data = inputString3.replace(searchText3, "");
+			var inputString0 = data;
+var searchText0 = "&info[0][center][created_at]=";
+var searchText1 = "&info[1][center][created_at]=";
+var searchText2 = "&info[2][center][created_at]=";
+var searchText3 = "&info[3][center][created_at]=";
+var inputString1 = inputString0.replace(searchText0, "");
+var inputString2 = inputString1.replace(searchText1, "");
+var inputString3 = inputString2.replace(searchText2, "");
+var data = inputString3.replace(searchText3, "");
+				var inputString0 = data;
+var searchText0 = "&info[0][center][updated_at]=";
+var searchText1 = "&info[1][center][updated_at]=";
+var searchText2 = "&info[2][center][updated_at]=";
+var searchText3 = "&info[3][center][updated_at]=";
+var inputString1 = inputString0.replace(searchText0, "");
+var inputString2 = inputString1.replace(searchText1, "");
+var inputString3 = inputString2.replace(searchText2, "");
+var data = inputString3.replace(searchText3, "");
         $http.post(basepath+'/slot_pay_now', data, config).then(function(resp){
             if(!angular.isUndefined(resp.data)){
                 if(!angular.isUndefined(resp.data.status)){
