@@ -593,7 +593,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 	    clearTimeout(timeoutId);
 	    var timeoutId = setTimeout(function() {
 		    localStorage.removeItem('paytoken');
-		}, 60000); // 120000 milliseconds = 2 minutes
+		}, 120000); // 120000 milliseconds = 2 minutes
 
         });
     };
