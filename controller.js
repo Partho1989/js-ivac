@@ -555,7 +555,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 				}
 
 
-                        }
+                        } if(resp.data.status === 'FAIL'){}
                         else{
                             $scope.showAlert('danger', 'Error!', 'Issue with data, try again');
                         }
