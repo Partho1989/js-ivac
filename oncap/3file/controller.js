@@ -585,16 +585,18 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     }
 
     $scope.recaptchaTokenPay = null;
-    var stime = 120000;
+ var deletet= 0;
     window.setRecaptchaTokenPay = function(token) {
         $scope.$apply(function() {
             $scope.recaptchaTokenPay = token;
             $scope.captchaVerifiedPay = !!token; // Set captchaVerified to true if token exists
 	    localStorage.setItem('paytoken', token);
-	    stime = 120000;
+	    deletet= 1;
 	    setTimeout(function() {
+		    if( deletet=== 1) {
 		    localStorage.removeItem('paytoken');
-		}, stime); // 120000 milliseconds = 2 minutes
+		    }
+		}, 120000); // 120000 milliseconds = 2 minutes
 
         });
     };
