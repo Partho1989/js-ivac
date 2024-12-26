@@ -785,8 +785,6 @@ function makeRequestpay() {
 
     /*end appointment*/
 
-
-    
     /*send otp */
     sendOtpprotect = 0;
     $scope.sendOtp = function() {
