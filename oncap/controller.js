@@ -116,7 +116,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     $scope.emailEditable = true;
     $scope.disableVerifyBtn = true;
     $scope.sendOtpDisabled = false;
-    $scope.captchaVerified = false;
+    //$scope.captchaVerified = false;
     $scope.captchaVerifiedPay = false;
 
     /* ANALYZE WEB FILE NUMBER TO FILTER IVAC CENTERS DEPENDING ON CENTERS */
@@ -583,14 +583,15 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     $scope.selectAppointmentTime = function (slot, webFileInfo, e){
         $scope.selected_slot = slot;
     }
-
+    var timeoutId = null;
     $scope.recaptchaTokenPay = null;
     window.setRecaptchaTokenPay = function(token) {
         $scope.$apply(function() {
             $scope.recaptchaTokenPay = token;
             $scope.captchaVerifiedPay = !!token; // Set captchaVerified to true if token exists
+	    clearTimeout(timeoutId);
 	    localStorage.setItem('paytoken', token);
-	    setTimeout(function() {
+	    timeoutId = setTimeout(function() {
 		    localStorage.removeItem('paytoken');
 		}, 120000); // 120000 milliseconds = 2 minutes
 
@@ -614,13 +615,14 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             var tokenpay = prompt("Please Enter recaptchaTokenPay Hash :");
             if (tokenpay === "") {
 	    return;
-		} else {
+		} else  {
 		    $scope.recaptchaTokenPay = tokenpay;
 		    localStorage.setItem('paytoken', tokenpay);
+		    clearTimeout(timeoutId);
 		    localStorage.setItem('otpclick', '555555');
-		    setTimeout(function() {
-		    localStorage.removeItem('otpclick');
-		    }, 120000); // 120000 milliseconds = 2 minutes
+		    timeoutId = setTimeout(function() {
+			    localStorage.removeItem('paytoken');
+			}, 120000); // 120000 milliseconds = 2 minutes
 
 		}
         }
@@ -782,37 +784,13 @@ function makeRequestpay() {
     }
 
     /*end appointment*/
-
-    $scope.recaptchaToken = null;
-    window.setRecaptchaToken = function(token) {
-        $scope.$apply(function() {
-            $scope.recaptchaToken = token;
-            $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists
-		localStorage.setItem('otptoken', token);
-	    setTimeout(function() {
-		    localStorage.removeItem('otptoken');
-		}, 120000); // 120000 milliseconds = 2 minutes
-
-        });
-    };
-    
+	
     /*send otp */
     sendOtpprotect = 0;
     $scope.sendOtp = function() {
 
         //$scope.loading = true;
-        if (!$scope.recaptchaToken) {
-            $scope.loading = false;
-            $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
-	var token = prompt("Please Enter Recaptcha Hash :");
-           if (token === "") {
-		    return;
-		} else {
-		    $scope.recaptchaToken = token;
-		   sendOtpprotect = 0;
-		}
-
-        }
+    
 	if(sendOtpprotect === 0){
 	sendOtpprotect = 1;
         var resend = $scope.verifyOtp ? 1 : 0;
@@ -825,7 +803,6 @@ function makeRequestpay() {
             'action': 'sendOtp',
             'info': $scope.payment,
             'resend' : resend,
-            'hash_params_otp': $scope.recaptchaToken,
         });
         var config = {
             headers: {
