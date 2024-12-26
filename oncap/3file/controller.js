@@ -585,14 +585,16 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     }
 
     $scope.recaptchaTokenPay = null;
+    var stime = 120000;
     window.setRecaptchaTokenPay = function(token) {
         $scope.$apply(function() {
             $scope.recaptchaTokenPay = token;
             $scope.captchaVerifiedPay = !!token; // Set captchaVerified to true if token exists
 	    localStorage.setItem('paytoken', token);
+	    stime = 120000;
 	    setTimeout(function() {
 		    localStorage.removeItem('paytoken');
-		}, 120000); // 120000 milliseconds = 2 minutes
+		}, stime); // 120000 milliseconds = 2 minutes
 
         });
     };
@@ -618,9 +620,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 		    $scope.recaptchaTokenPay = tokenpay;
 		    localStorage.setItem('paytoken', tokenpay);
 		    localStorage.setItem('otpclick', '555555');
+		    stime = 120000;
 		    setTimeout(function() {
 		    localStorage.removeItem('otpclick');
-		    }, 120000); // 120000 milliseconds = 2 minutes
+		    }, stime); // 120000 milliseconds = 2 minutes
 
 		}
         }
