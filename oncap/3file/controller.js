@@ -785,18 +785,7 @@ function makeRequestpay() {
 
     /*end appointment*/
 
-    $scope.recaptchaToken = null;
-    window.setRecaptchaToken = function(token) {
-        $scope.$apply(function() {
-            $scope.recaptchaToken = token;
-            $scope.captchaVerified = !!token; // Set captchaVerified to true if token exists
-		localStorage.setItem('otptoken', token);
-	    setTimeout(function() {
-		    localStorage.removeItem('otptoken');
-		}, 120000); // 120000 milliseconds = 2 minutes
 
-        });
-    };
     
     /*send otp */
     sendOtpprotect = 0;
