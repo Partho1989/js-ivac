@@ -586,10 +586,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 
     $scope.recaptchaTokenPay = null;
     window.setRecaptchaTokenPay = function(token) {
-	clearTimeout(timeoutId);
         $scope.$apply(function() {
             $scope.recaptchaTokenPay = token;
             $scope.captchaVerifiedPay = !!token; // Set captchaVerified to true if token exists
+	    clearTimeout(timeoutId);
 	    localStorage.setItem('paytoken', token);
 	    var timeoutId = setTimeout(function() {
 		    localStorage.removeItem('paytoken');
