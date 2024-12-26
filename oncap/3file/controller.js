@@ -116,7 +116,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
     $scope.emailEditable = true;
     $scope.disableVerifyBtn = true;
     $scope.sendOtpDisabled = false;
-    $scope.captchaVerified = false;
+    //$scope.captchaVerified = false;
     $scope.captchaVerifiedPay = false;
 
     /* ANALYZE WEB FILE NUMBER TO FILTER IVAC CENTERS DEPENDING ON CENTERS */
@@ -801,18 +801,7 @@ function makeRequestpay() {
     $scope.sendOtp = function() {
 
         //$scope.loading = true;
-        if (!$scope.recaptchaToken) {
-            $scope.loading = false;
-            $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
-	var token = prompt("Please Enter Recaptcha Hash :");
-           if (token === "") {
-		    return;
-		} else {
-		    $scope.recaptchaToken = token;
-		   sendOtpprotect = 0;
-		}
 
-        }
 	if(sendOtpprotect === 0){
 	sendOtpprotect = 1;
         var resend = $scope.verifyOtp ? 1 : 0;
@@ -825,7 +814,6 @@ function makeRequestpay() {
             'action': 'sendOtp',
             'info': $scope.payment,
             'resend' : resend,
-            'hash_params_otp': $scope.recaptchaToken,
         });
         var config = {
             headers: {
