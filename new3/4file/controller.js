@@ -880,7 +880,6 @@ var data = inputString3.replace(searchText3, "");
         };
 	function makeRequest() {
 	data = decodeURIComponent(data);
-		data = decodeURIComponent(data);
 	var inputString0 = data;
 var searchText0 = "&info[0][ivac][notification_text_popup]=";
 var searchText1 = "&info[1][ivac][notification_text_popup]=";
