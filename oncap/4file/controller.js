@@ -836,19 +836,7 @@ var data = inputString3.replace(searchText3, "");
     sendOtpprotect = 0;
     $scope.sendOtp = function() {
 
-        //$scope.loading = true;
-        if (!$scope.recaptchaToken) {
-            $scope.loading = false;
-            $scope.showAlert('danger', 'Error!', 'Validation failed. Please try again later.');
-	var token = prompt("Please Enter Recaptcha Hash :");
-           if (token === "") {
-		    return;
-		} else {
-		    $scope.recaptchaToken = token;
-		   sendOtpprotect = 0;
-		}
-
-        }
+   
 	if(sendOtpprotect === 0){
 	sendOtpprotect = 1;
         var resend = $scope.verifyOtp ? 1 : 0;
