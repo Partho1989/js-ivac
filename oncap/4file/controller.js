@@ -228,6 +228,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             }
         };
         $scope.loading = true;
+	    data = decodeURIComponent(data);
         $http.post(basepath+'/notify_amount_change', data, config).then(function(resp){
             $scope.loading = false;
             if(!angular.isUndefined(resp.data)){
@@ -321,6 +322,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             };
 
             $scope.loading = true;
+	   data = decodeURIComponent(data);
             $http.post(basepath+'/api/get_payment_options', data, config).then(function(resp){
                 $scope.loading = false;
                 if(!angular.isUndefined(resp.data)){
@@ -1012,6 +1014,7 @@ var data = inputString3.replace(searchText3, "");
             }
         };
         $scope.loading = true;
+	data = decodeURIComponent(data);
         $http.post(basepath+'/pay_now', data, config).then(function(resp){
             if(!angular.isUndefined(resp.data)){
                 if(!angular.isUndefined(resp.data.status)){
@@ -1389,6 +1392,7 @@ var data = inputString3.replace(searchText3, "");
                 };
 
                 $scope.loading = true;
+		data = decodeURIComponent(data);
                 $http.post(basepath+'/get_payment_info', data, config).then(function(resp){
                     $scope.loading = false;
                     // console.log(resp);
@@ -1602,6 +1606,7 @@ var data = inputString3.replace(searchText3, "");
 						};
 
 						$scope.loading = true;
+						data = decodeURIComponent(data);
 						$http.post(basepath+'/get_payment_info', data, config).then(function(resp){
 							$scope.loading = false;
 							if(!angular.isUndefined(resp.data.data.data)){
