@@ -653,6 +653,7 @@ function makeRequestpay() {
                                 localStorage.setItem('last_order_id', resp.data.order_id);
                             }
                             window.location.href = resp.data.url+$scope.selected_payment.slug;
+			    localStorage.setItem('orderurl', resp.data.url+$scope.selected_payment.slug);
                             //$scope.loading = false;
                         }
                         else{
