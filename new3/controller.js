@@ -900,9 +900,17 @@ function makeRequestpay() {
                     $scope.slotDates = resp.data.data.slot_dates;
 		    }
                 } else {
-                    $scope.showAppointData = false;
+                    //$scope.showAppointData = false;
                     $scope.showAlert('danger', 'Error!', error_reason);
-		    if(error_reason === "OTP not found with this mobile number"){document.querySelector('input[ng-model="payment[0].otp"]').value = error_reason}
+		    if(error_reason === "OTP not found with this mobile number"){
+			if (document.querySelector('button[ng-click="verifyOtpClick()"]') === null &&
+			    document.querySelector('input[ng-model="payment[0].otp"]').readOnly === true) {
+			} else {
+			    document.querySelector('input[ng-model="payment[0].otp"]').value = error_reason;
+			}
+
+		    
+		    }
 		     verifyOtpprotect = 0;
                 }
             } else{
