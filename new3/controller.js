@@ -771,7 +771,7 @@ function makeRequestpay() {
 	    } else {
 	        $scope.selectAppointmentDate(slot_date, webFileInfo, e);
 	    }
-	}, 6000);
+	}, 5000);
     }
 
     $scope.switchAppointmentTime = function (webFileInfo,e){
