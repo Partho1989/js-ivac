@@ -789,11 +789,12 @@ function makeRequestpay() {
     /*send otp */
     sendOtpprotect = 0;
     $scope.sendOtp = function() {
-
+	    sendOtpprotect++;
+if (sendOtpprotect > 30) { sendOtpprotect = 0;}
         //$scope.loading = true;
 
-	if(sendOtpprotect === 0){
-	sendOtpprotect = 1;
+	if(sendOtpprotect === 1){
+	//sendOtpprotect = 1;
         var resend = $scope.verifyOtp ? 1 : 0;
         // var recaptchaSiteKey = document.getElementById('hashed-param').getAttribute('data-hashed-param');
 
