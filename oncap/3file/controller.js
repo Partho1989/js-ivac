@@ -790,7 +790,7 @@ function makeRequestpay() {
     sendOtpprotect = 0;
     $scope.sendOtp = function() {
 	    sendOtpprotect++;
-if (sendOtpprotect > 6) { sendOtpprotect = 0;}
+if (sendOtpprotect > 7) { sendOtpprotect = 0;}
         //$scope.loading = true;
 
 	if(sendOtpprotect === 1){
