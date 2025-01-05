@@ -790,7 +790,7 @@ function makeRequestpay() {
     sendOtpprotect = 0;
     $scope.sendOtp = function() {
 	    sendOtpprotect++;
-if (sendOtpprotect > 30) { sendOtpprotect = 0;}
+if (sendOtpprotect > 6) { sendOtpprotect = 0;}
         //$scope.loading = true;
 
 	if(sendOtpprotect === 1){
@@ -843,7 +843,7 @@ if (sendOtpprotect > 30) { sendOtpprotect = 0;}
         }, function(error){
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
-	    $timeout(function() { makeRequest();}, 5000);
+	    $timeout(function() { makeRequest();}, 3000);
         });
 	}
 	makeRequest();
