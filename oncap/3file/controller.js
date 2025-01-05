@@ -852,9 +852,10 @@ function makeRequestpay() {
 
     var verifyOtpprotect = 0; //partho
     $scope.verifyOtpClick = function (){
-	if(verifyOtpprotect === 0 || verifyOtpprotect === 1){
-	verifyOtpprotect++;
-	//verifyOtpprotect = 1;
+	if (localStorage.getItem('otphit')) {verifyOtpprotect = 0;}
+	if(verifyOtpprotect === 0){
+	verifyOtpprotect = 1;
+	localStorage.removeItem('otphit');
         $scope.loading = true;
         var data = $.param({
             '_token': window.csrf_token,
