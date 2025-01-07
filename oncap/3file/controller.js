@@ -790,9 +790,10 @@ function makeRequestpay() {
     sendOtpprotect = 0;
     $scope.sendOtp = function() {
         //$scope.loading = true;
-
+if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
 	if(sendOtpprotect === 0){
 	sendOtpprotect = 1;
+	localStorage.removeItem('otpsent');
         var resend = $scope.verifyOtp ? 1 : 0;
         // var recaptchaSiteKey = document.getElementById('hashed-param').getAttribute('data-hashed-param');
 
