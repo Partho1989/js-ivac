@@ -869,6 +869,7 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
             }
         };
+	data = decodeURIComponent(data);
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
                 $scope.loading = false;
