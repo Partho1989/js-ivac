@@ -763,12 +763,14 @@ function makeRequestpay() {
         $scope.showAppointData = false;
         $scope.payment[0].otp = '';
     };
-
+var dateinterval = null;
     $scope.switchAppointmentDate = function (webFileInfo,e){
         $scope.payment[0].appointment_time = $scope.appointment_date;
         var slot_date = $scope.appointment_date;
         $scope.selectAppointmentDate(slot_date,webFileInfo,e);
-	    var dateinterval = setInterval(function() {
+	    clearInterval(dateinterval);
+	    dateinterval = null;
+	    dateinterval = setInterval(function() {
 	    if ($('select[name="appointment_time"]')[0].options.length > 1) {
 	        clearInterval(dateinterval);
 	    } else {
