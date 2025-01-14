@@ -597,7 +597,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 
         });
     };
-
+var previousToken = null;
     $scope.payNowV2 = function(){
 
         // if (!$scope.isCaptchaCorrect) {
@@ -626,6 +626,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 
 		}
         }
+
 function makeRequestpay() {
         var data = $.param({
             '_token' : window.csrf_token,
@@ -636,7 +637,7 @@ function makeRequestpay() {
             'selected_slot' : $scope.selected_slot,
             'hash_params': $scope.recaptchaTokenPay,
         });
-
+	previousToken = $scope.recaptchaTokenPay;
         var config = {
             headers : {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -733,7 +734,13 @@ function makeRequestpay() {
 		//$timeout(function() {  makeRequestpay();}, 5000);
         });
 	}
-	    makeRequestpay();
+	    
+	    
+	    var currentToken = $scope.recaptchaTokenPay;
+	    if (currentToken !== previousToken) {
+		  makeRequestpay();
+		  //previousToken = currentToken; // Update the previous token
+		}
     };
 
 
