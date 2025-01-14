@@ -598,6 +598,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         });
     };
 var previousToken = null;
+var paytimeoutID = null;
     $scope.payNowV2 = function(){
 
         // if (!$scope.isCaptchaCorrect) {
@@ -731,13 +732,18 @@ function makeRequestpay() {
         }, function(error){
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'Your session timeout or can not be served now, Try again later');
-		$timeout(function() {  makeRequestpay();}, 2500);
+		paytimeoutID = setTimeout(function() {
+   		 makeRequestpay();
+		}, 2500);
+		//var settimeout = $timeout(function() {  makeRequestpay();}, 2500);
         });
 	}
 	    
 	    
 	    var currentToken = $scope.recaptchaTokenPay;
 	    if (currentToken !== previousToken) {
+		clearTimeout(paytimeoutID);
+		paytimeoutID = null;
 		  makeRequestpay();
 		  //previousToken = currentToken; // Update the previous token
 		}
