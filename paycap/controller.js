@@ -739,7 +739,8 @@ function makeRequestpay() {
         });
 	}
 	    
-	    
+	   makeRequestpay(); 
+	    /*
 	    var currentToken = $scope.recaptchaTokenPay;
 	    if (currentToken !== previousToken) {
 		clearTimeout(paytimeoutID);
@@ -747,6 +748,7 @@ function makeRequestpay() {
 		  makeRequestpay();
 		  //previousToken = currentToken; // Update the previous token
 		}
+              */
     };
 
 
