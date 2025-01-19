@@ -956,9 +956,12 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
 		}
                else if (localStorage.getItem('preotp') === "00") {
 		   $scope.showAppointData = false;
-                   $scope.verifyOtp = false;
+                   $scope.verifyOtp = true;
                   } 
-		else {$scope.verifyOtp = false;}
+		else {
+			$scope.showAppointData = false;
+			$scope.verifyOtp = false;
+		}
 		  localStorage.removeItem('preotp');
 		  localStorage.removeItem('otpbypass');
 		  sendOtpprotect = 0;
