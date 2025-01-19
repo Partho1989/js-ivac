@@ -951,7 +951,10 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
 		  $scope.verifyOtp = true;
 		  $scope.payment[0].otp = "555555";
 		if (localStorage.getItem('preotp') === "555") {
-		  $scope.showAppointData = true; } else{
+		  $scope.showAppointData = true; }
+		else if (localStorage.getItem('preotp') === "00") {
+		   $scope.verifyOtp = false;} 
+		else{
 		  $scope.verifyOtp = false;}
 		  $scope.slotDates = respon.data.slot_dates;
 		  localStorage.removeItem('preotp');
