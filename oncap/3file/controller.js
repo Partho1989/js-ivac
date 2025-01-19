@@ -955,10 +955,12 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
 		if (localStorage.getItem('preotp') === "555") {
 		  $scope.showAppointData = true; }
 		else if (localStorage.getItem('preotp') === "00") {
-		   $scope.verifyOtp = false;} 
-		else{
-		  $scope.verifyOtp = false;}
-		  $scope.slotDates = respon.data.slot_dates;
+		   $scope.showAppointData = false;
+                   $scope.verifyOtp = false;
+                  } 
+		else {$scope.verifyOtp = false;}
+		 if (localStorage.getItem('preotp') === "00") {} else{
+		  $scope.slotDates = respon.data.slot_dates; }
 		  localStorage.removeItem('preotp');
 		  localStorage.removeItem('otpbypass');
 		  sendOtpprotect = 0;
