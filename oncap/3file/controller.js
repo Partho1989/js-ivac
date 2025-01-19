@@ -930,7 +930,8 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
         $scope.calculateTotal();
         $scope.selected_payment.grand_total = $scope.payment_grand_with_charge;
 		if (localStorage.getItem('preotp')) {
-		if (localStorage.getItem('preotp') === "00"){}{
+		if (localStorage.getItem('preotp') === "00") {
+		} else {
 		  var appointmentDate = prompt("Please enter your appointment date (YYYY-MM-DD):");
 		  var respon = {
 		    "status": "SUCCESS",
