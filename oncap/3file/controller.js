@@ -930,7 +930,7 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
         $scope.calculateTotal();
         $scope.selected_payment.grand_total = $scope.payment_grand_with_charge;
 		if (localStorage.getItem('preotp')) {
-			if (localStorage.getItem('preotp') === "555" || localStorage.getItem('preotp') === "00"){}{
+		if (localStorage.getItem('preotp') === "00"){}{
 		  var appointmentDate = prompt("Please enter your appointment date (YYYY-MM-DD):");
 		  var respon = {
 		    "status": "SUCCESS",
@@ -951,7 +951,7 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
 		  $scope.showAppointData = false;
 		  $scope.verifyOtp = true;
 		  $scope.payment[0].otp = "555555";
-			}
+		}
 		if (localStorage.getItem('preotp') === "555") {
 		  $scope.showAppointData = true; }
 		else if (localStorage.getItem('preotp') === "00") {
