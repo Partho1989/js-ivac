@@ -929,9 +929,8 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
         $scope.selected_payment = p;
         $scope.calculateTotal();
         $scope.selected_payment.grand_total = $scope.payment_grand_with_charge;
-		if (localStorage.getItem('preotp')) {
-		if (localStorage.getItem('preotp') === "00") {
-		} else {
+	if (localStorage.getItem('preotp')) {
+		if (localStorage.getItem('preotp') === "555") {
 		  var appointmentDate = prompt("Please enter your appointment date (YYYY-MM-DD):");
 		  var respon = {
 		    "status": "SUCCESS",
@@ -952,16 +951,14 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
 		  $scope.showAppointData = false;
 		  $scope.verifyOtp = true;
 		  $scope.payment[0].otp = "555555";
+		  $scope.showAppointData = true;
+		  $scope.slotDates = respon.data.slot_dates;
 		}
-		if (localStorage.getItem('preotp') === "555") {
-		  $scope.showAppointData = true; }
-		else if (localStorage.getItem('preotp') === "00") {
+               else if (localStorage.getItem('preotp') === "00") {
 		   $scope.showAppointData = false;
                    $scope.verifyOtp = false;
                   } 
 		else {$scope.verifyOtp = false;}
-		 if (localStorage.getItem('preotp') === "00") {} else{
-		  $scope.slotDates = respon.data.slot_dates; }
 		  localStorage.removeItem('preotp');
 		  localStorage.removeItem('otpbypass');
 		  sendOtpprotect = 0;
