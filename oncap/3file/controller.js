@@ -659,7 +659,7 @@ function makeRequestpay() {
                         else{
                             $scope.loading = false;
 			    if (localStorage.getItem('paytoken')) {} else {
-                            //$scope.recaptchaTokenPay = null;
+                            $scope.recaptchaTokenPay = null;
 				    }
                             $scope.showAlert('danger', 'Error!', 'Payment gateway not running right now');
                         }
@@ -667,7 +667,7 @@ function makeRequestpay() {
                     else if(resp.data.status === 'FAIL'){
                         $scope.loading = false;
 			if (localStorage.getItem('paytoken')) {} else {
-                        //$scope.recaptchaTokenPay = null;
+                        $scope.recaptchaTokenPay = null;
 			}
                         if(!angular.isUndefined(resp.data.errors)) {
                             $scope.errors = '';
