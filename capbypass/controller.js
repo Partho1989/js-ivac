@@ -612,7 +612,10 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
         if (!$scope.recaptchaTokenPay) {
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'TokenPay Validation failed. Please try again later.');
-            var tokenpay = prompt("Please Enter recaptchaTokenPay Hash :");
+	    var tokenpay = null;
+	      var caphash = localStorage.getItem("caphash");
+               if(caphash){ tokenpay = caphash} else{
+            var tokenpay = prompt("Please Enter recaptchaTokenPay Hash :");}
             if (tokenpay === "") {
 	    return;
 		} else {
