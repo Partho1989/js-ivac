@@ -597,7 +597,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 
         });
     };
-
+var ghash=null;
     $scope.payNowV2 = function(){
 
         // if (!$scope.isCaptchaCorrect) {
@@ -613,13 +613,18 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
             $scope.loading = false;
             $scope.showAlert('danger', 'Error!', 'TokenPay Validation failed. Please try again later.');
 	    var tokenpay = null;
-	      var caphash = localStorage.getItem("caphash");
-               if(caphash){ tokenpay = caphash} else{
-            var tokenpay = prompt("Please Enter recaptchaTokenPay Hash :");}
-            if (tokenpay === "") {
-	    return;
-		} else {
-		    $scope.recaptchaTokenPay = tokenpay;
+	    var caphash = localStorage.getItem("caphash");
+            if(caphash){ 
+		    tokenpay = caphash
+		    ghash = caphash
+	    } else {
+		var tokenpay = prompt("Please Enter recaptchaTokenPay Hash :");    
+	    }
+	    
+	    if (tokenpay === "") {
+		    return;
+	    } else {
+		    //$scope.recaptchaTokenPay = tokenpay;
 		    localStorage.setItem('paytoken', tokenpay);
 		    clearTimeout(timeoutId);
 		    localStorage.setItem('otpclick', '555555');
@@ -628,7 +633,9 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 			}, 120000); // 120000 milliseconds = 2 minutes
 
 		}
-        }
+        } else {
+		ghash = $scope.recaptchaTokenPay;
+	}
 function makeRequestpay() {
         var data = $.param({
             '_token' : window.csrf_token,
@@ -637,7 +644,7 @@ function makeRequestpay() {
             'info' : $scope.payment,
             'selected_payment' : $scope.selected_payment,
             'selected_slot' : $scope.selected_slot,
-            'hash_params': $scope.recaptchaTokenPay,
+            'hash_params': ghash ,
         });
 
         var config = {
