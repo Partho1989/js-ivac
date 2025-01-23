@@ -652,28 +652,7 @@ function makeRequestpay() {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
             }
         };
-	//data = decodeURIComponent(data); test
-	var data = decodeURIComponent(data);
-
-// Define patterns to remove
-var patterns = [
-    /&info\[\d\]\[ivac\]\[created_at\]=/g,
-    /&info\[\d\]\[center\]\[created_at\]=/g,
-    /&info\[\d\]\[ivac\]\[notification_text_popup\]=/g,
-    /&info\[\d\]\[ivac\]\[updated_at\]=/g,
-    /&info\[\d\]\[center\]\[created_by\]=/g,
-    /&info\[\d\]\[ivac\]\[contact_number\]=/g,
-    /&info\[\d\]\[ivac\]\[created_by\]=/g,
-    /&info\[\d\]\[amountChangeData\]\[notice_short\]=/g,
-    /&info\[\d\]\[amountChangeData\]\[notice_popup\]=/g,
-    /&info\[\d\]\[center\]\[updated_at\]=/g
-];
-
-// Replace each pattern in the data string
-patterns.forEach(function(pattern) {
-    data = data.replace(pattern, "");
-});
-
+	data = decodeURIComponent(data);
         $http.post(basepath+'/slot_pay_now', data, config).then(function(resp){
             if(!angular.isUndefined(resp.data)){
                 if(!angular.isUndefined(resp.data.status)){
@@ -844,28 +823,7 @@ if (localStorage.getItem('otpsent')) { sendOtpprotect = 0;}
             },
         };
 	function makeRequest() {
-	//data = decodeURIComponent(data);
-	var data = decodeURIComponent(data);
-
-// Define patterns to remove
-var patterns = [
-    /&info\[\d\]\[ivac\]\[created_at\]=/g,
-    /&info\[\d\]\[center\]\[created_at\]=/g,
-    /&info\[\d\]\[ivac\]\[notification_text_popup\]=/g,
-    /&info\[\d\]\[ivac\]\[updated_at\]=/g,
-    /&info\[\d\]\[center\]\[created_by\]=/g,
-    /&info\[\d\]\[ivac\]\[contact_number\]=/g,
-    /&info\[\d\]\[ivac\]\[created_by\]=/g,
-    /&info\[\d\]\[amountChangeData\]\[notice_short\]=/g,
-    /&info\[\d\]\[amountChangeData\]\[notice_popup\]=/g,
-    /&info\[\d\]\[center\]\[updated_at\]=/g
-];
-
-// Replace each pattern in the data string
-patterns.forEach(function(pattern) {
-    data = data.replace(pattern, "");
-});
-
+	data = decodeURIComponent(data);
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
                 $scope.loading = false;
@@ -923,28 +881,7 @@ patterns.forEach(function(pattern) {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
             }
         };
-	//data = decodeURIComponent(data);
-		var data = decodeURIComponent(data);
-
-// Define patterns to remove
-var patterns = [
-    /&info\[\d\]\[ivac\]\[created_at\]=/g,
-    /&info\[\d\]\[center\]\[created_at\]=/g,
-    /&info\[\d\]\[ivac\]\[notification_text_popup\]=/g,
-    /&info\[\d\]\[ivac\]\[updated_at\]=/g,
-    /&info\[\d\]\[center\]\[created_by\]=/g,
-    /&info\[\d\]\[ivac\]\[contact_number\]=/g,
-    /&info\[\d\]\[ivac\]\[created_by\]=/g,
-    /&info\[\d\]\[amountChangeData\]\[notice_short\]=/g,
-    /&info\[\d\]\[amountChangeData\]\[notice_popup\]=/g,
-    /&info\[\d\]\[center\]\[updated_at\]=/g
-];
-
-// Replace each pattern in the data string
-patterns.forEach(function(pattern) {
-    data = data.replace(pattern, "");
-});
-
+	data = decodeURIComponent(data);
         $http.post(basepath + '/queue-manage', data, config).then(function (resp) {
             if(!angular.isUndefined(resp.data)){
                 $scope.loading = false;
@@ -1058,27 +995,6 @@ patterns.forEach(function(pattern) {
             }
         };
         $scope.loading = true;
-	var data = decodeURIComponent(data);
-
-// Define patterns to remove
-var patterns = [
-    /&info\[\d\]\[ivac\]\[created_at\]=/g,
-    /&info\[\d\]\[center\]\[created_at\]=/g,
-    /&info\[\d\]\[ivac\]\[notification_text_popup\]=/g,
-    /&info\[\d\]\[ivac\]\[updated_at\]=/g,
-    /&info\[\d\]\[center\]\[created_by\]=/g,
-    /&info\[\d\]\[ivac\]\[contact_number\]=/g,
-    /&info\[\d\]\[ivac\]\[created_by\]=/g,
-    /&info\[\d\]\[amountChangeData\]\[notice_short\]=/g,
-    /&info\[\d\]\[amountChangeData\]\[notice_popup\]=/g,
-    /&info\[\d\]\[center\]\[updated_at\]=/g
-];
-
-// Replace each pattern in the data string
-patterns.forEach(function(pattern) {
-    data = data.replace(pattern, "");
-});
-
         $http.post(basepath+'/pay_now', data, config).then(function(resp){
             if(!angular.isUndefined(resp.data)){
                 if(!angular.isUndefined(resp.data.status)){
