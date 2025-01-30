@@ -592,6 +592,7 @@ app.controller('payment_application', ['$scope', '$timeout', '$http', '$filter',
 	    clearTimeout(timeoutId);
 	    localStorage.setItem('paytoken', token);
 	    timeoutId = setTimeout(function() {
+		    $scope.recaptchaTokenPay = null;
 		    localStorage.removeItem('paytoken');
 		}, 120000); // 120000 milliseconds = 2 minutes
 
